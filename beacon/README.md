@@ -5,6 +5,11 @@ explicit application instrumentation. The full upstream source and history are
 preserved; there is no GitHub fork relationship. No prebuilt Beacon agent or
 package-index distribution is published.
 
+For the fixed source release, use [the installation guide](INSTALL.md). Development
+builds below deliberately use a smaller offline configuration and do not supersede
+release acceptance. The complete receiver acceptance and selected regression runner
+are documented in [acceptance](acceptance/README.md).
+
 ## Local SDK build
 
 Requirements for this initial check: Linux, a C++17 compiler, CMake 3.16 or later,

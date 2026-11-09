@@ -1,9 +1,11 @@
 # Beacon C++ Release Prerequisites
 
-No official Beacon C++ release exists. The upstream `1.30.0` source version and
-imported history are not Beacon release artifacts.
+Beacon C++ uses independent `v0.x.y` release tags. The initial source distribution
+is `v0.1.0`; the upstream `1.30.0` source version and `upstream/*` refs are separate.
+The release maintainer publishes the accepted source and evidence through the
+`beacon-observability/beacon-cpp` GitHub repository; no package-index identity is used.
 
-Before a first independent Beacon release:
+For each independent Beacon release:
 
 1. Define a Beacon version and tag namespace distinct from upstream tags; agree on
    source archives, optional binary formats, publishing channels, and maintainers.
@@ -25,3 +27,24 @@ Before a first independent Beacon release:
 Profiling, automatic instrumentation, Security, and additional platforms require
 separate implementation and validation before any support claim. No inherited
 upstream publishing workflow is a Beacon release entry point.
+
+## Initial source asset
+
+With the protocol submodule initialized at its recorded commit, create the archive
+from a clean, committed revision:
+
+```sh
+python3 beacon/package_source.py --revision HEAD --output /path/to/release-assets
+```
+
+The packager consumes Git objects rather than working-tree files, bundles only
+the protocol submodule needed for the declared build, normalizes archive metadata,
+and produces `beacon-cpp-0.1.0-source.tar.gz`. Before a later version, update the
+packager's distribution version and repeat acceptance; never overwrite v0.1.0.
+
+Record the full source commit, upstream and protocol commits, dependency/toolchain
+versions, validated scope, regression counts, receiver image digest, artifact hash,
+and actual reception result in `release-manifest.json`. Create `SHA256SUMS` for
+the source asset and manifest. Validate the extracted archive, attach exactly those
+accepted files to the release, and repeat verification from downloaded public assets.
+Do not use GitHub's automatic source archive for the bundled-protocol build.
