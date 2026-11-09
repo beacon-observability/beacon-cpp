@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.16)
+project(beacon_cpp_smoke LANGUAGES CXX)
+find_package(opentelemetry-cpp CONFIG REQUIRED)
+add_executable(beacon_cpp_smoke main.cc)
+target_compile_features(beacon_cpp_smoke PRIVATE cxx_std_17)
+target_link_libraries(beacon_cpp_smoke PRIVATE opentelemetry-cpp::trace opentelemetry-cpp::ostream_span_exporter)
